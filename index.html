@@ -27,8 +27,8 @@
             font-family: 'Outfit', 'Noto Sans TC', sans-serif;
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(255, 75, 43, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.1) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.2) 0px, transparent 50%);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,74 +40,84 @@
 
         .container {
             text-align: center;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(to right, #fff, #cbd5e1);
+            font-size: 2.8rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #fff, #94a3b8);
             -webkit-background-clip: text;
+            background-clip: text; /* Fix lint */
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .btn-wrapper {
             position: relative;
-            padding: 20px;
+            padding: 30px;
         }
 
-        /* 圓形紅色按鈕 */
+        /* 更圓、更亮的紅色圓形按鈕 */
         #magic-button {
-            width: 150px;
-            height: 150px;
+            width: 160px; /* 稍微大一點點 */
+            height: 160px;
             border-radius: 50%;
-            border: none;
+            border: 4px solid rgba(255, 255, 255, 0.1); /* 加入細微的框線增加層次 */
             cursor: pointer;
             background: var(--accent-gradient);
-            box-shadow: 0 10px 40px var(--shadow-color);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.3),
+                0 10px 40px var(--shadow-color);
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: white;
             position: relative;
             z-index: 1;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             outline: none;
         }
 
         #magic-button:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 20px 60px var(--shadow-color);
+            transform: scale(1.12) rotate(3deg); /* 加入一點點旋轉感 */
+            box-shadow: 
+                0 0 30px rgba(0, 0, 0, 0.3),
+                0 20px 60px var(--shadow-color);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         #magic-button:active {
-            transform: scale(0.9) translateY(0);
+            transform: scale(0.95);
         }
 
-        /* 按鈕外圍的光量 (Glow effect) */
+        /* 按鈕外圍的光圈 (Glow effect) */
         .btn-wrapper::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             background: var(--accent-gradient);
             border-radius: 50%;
-            filter: blur(20px);
-            opacity: 0.4;
-            transition: opacity 0.4s ease;
+            filter: blur(35px);
+            opacity: 0.3;
+            transition: all 0.5s ease;
             z-index: 0;
         }
 
         .btn-wrapper:hover::before {
-            opacity: 0.7;
+            opacity: 0.6;
+            filter: blur(45px);
+            width: 200px;
+            height: 200px;
         }
 
         /* 微動畫 */
@@ -130,7 +140,7 @@
         <h1>點擊這裡有驚喜</h1>
         
         <div class="btn-wrapper">
-            <button id="magic-button" onclick="sayHello()">Click Me</button>
+            <button id="magic-button" onclick="sayHello()">點我點我</button>
         </div>
 
         <p class="hint">試試看點擊上面的紅色圓形按鈕</p>
