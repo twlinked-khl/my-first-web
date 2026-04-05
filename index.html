@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驚喜點擊 - 給 Kevin 的特別頁面</title>
+    <!-- 使用 Google Fonts 提升排版質感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #ff4d4d;
+            --hover-red: #ff3333;
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --accent-gradient: linear-gradient(135deg, #ff416c, #ff4b2b);
+            --shadow-color: rgba(255, 75, 43, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 75, 43, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.1) 0px, transparent 50%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-wrapper {
+            position: relative;
+            padding: 20px;
+        }
+
+        /* 圓形紅色按鈕 */
+        #magic-button {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--accent-gradient);
+            box-shadow: 0 10px 40px var(--shadow-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
+        }
+
+        #magic-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 60px var(--shadow-color);
+        }
+
+        #magic-button:active {
+            transform: scale(0.9) translateY(0);
+        }
+
+        /* 按鈕外圍的光量 (Glow effect) */
+        .btn-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.4;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .btn-wrapper:hover::before {
+            opacity: 0.7;
+        }
+
+        /* 微動畫 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hint {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>點擊這裡有驚喜</h1>
+        
+        <div class="btn-wrapper">
+            <button id="magic-button" onclick="sayHello()">Click Me</button>
+        </div>
+
+        <p class="hint">試試看點擊上面的紅色圓形按鈕</p>
+    </div>
+
+    <script>
+        function sayHello() {
+            // 使用 alert 跳出視窗
+            alert("你好，Kevin！");
+        }
+        
+        // 額外增加小小的點擊動畫邏輯 (選用)
+        const btn = document.getElementById('magic-button');
+        btn.addEventListener('click', () => {
+            console.log('Button clicked by Kevin!');
+        });
+    </script>
+</body>
+</html>
