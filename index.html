@@ -10,11 +10,13 @@
         :root {
             --primary-red: #ff4d4d;
             --hover-red: #ff3333;
-            --bg-color: #020617; /* 更深、更純的深藍色 */
+            --bg-color: #020617;
             --text-color: #f8fafc;
             --accent-gradient: linear-gradient(135deg, #ff416c, #ff4b2b);
             --shadow-color: rgba(255, 75, 43, 0.4);
             --blue-glow: rgba(30, 64, 175, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -26,9 +28,6 @@
         body {
             font-family: 'Outfit', 'Noto Sans TC', sans-serif;
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.2) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.2) 0px, transparent 50%);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,22 +35,68 @@
             align-items: center;
             color: var(--text-color);
             overflow: hidden;
+            position: relative;
+        }
+
+        /* --- 動態星空背景效果 --- */
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #020617 0%, #0f172a 100%);
+            overflow: hidden;
+        }
+
+        #stars, #stars2, #stars3 {
+            position: absolute;
+            top: 0; left: 0;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        #stars {
+            width: 1px; height: 1px;
+            box-shadow: 174px 446px #FFF, 1269px 1018px #FFF, 495px 123px #FFF, 1928px 1726px #FFF, 500px 500px #FFF, 100px 800px #FFF, 1500px 200px #FFF, 1200px 1500px #FFF, 300px 1000px #FFF, 1800px 500px #FFF, 450px 1400px #FFF, 1600px 1100px #FFF, 200px 300px #FFF, 900px 1400px #FFF, 1300px 100px #FFF, 1700px 1400px #FFF;
+            animation: animStar 50s linear infinite;
+        }
+
+        #stars2 {
+            width: 2px; height: 2px;
+            box-shadow: 247px 116px #FFF, 1569px 1218px #FFF, 395px 323px #FFF, 1228px 1226px #FFF, 700px 200px #FFF, 150px 900px #FFF, 1400px 600px #FFF, 1100px 1300px #FFF, 400px 1100px #FFF, 1700px 800px #FFF;
+            animation: animStar 100s linear infinite;
+        }
+
+        #stars3 {
+            width: 3px; height: 3px;
+            box-shadow: 147px 116px #FFF, 1169px 218px #FFF, 195px 623px #FFF, 928px 826px #FFF, 300px 400px #FFF;
+            animation: animStar 150s linear infinite;
+        }
+
+        @keyframes animStar {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-2000px); }
         }
 
         .container {
             text-align: center;
             animation: fadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             font-size: 2.8rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem; /* 稍微縮減間距 */
             letter-spacing: -0.01em;
             background: linear-gradient(135deg, #fff, #94a3b8);
             -webkit-background-clip: text;
-            background-clip: text; /* Fix lint */
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         .btn-wrapper {
@@ -59,82 +104,105 @@
             padding: 30px;
         }
 
-        /* 更圓、更亮的紅色圓形按鈕 */
         #magic-button {
-            width: 160px; /* 稍微大一點點 */
-            height: 160px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.1); /* 加入細微的框線增加層次 */
+            border: 4px solid rgba(255, 255, 255, 0.15);
             cursor: pointer;
             background: var(--accent-gradient);
             box-shadow: 
-                0 0 20px rgba(0, 0, 0, 0.3),
-                0 10px 40px var(--shadow-color);
+                0 0 30px rgba(0, 0, 0, 0.4),
+                0 15px 50px var(--shadow-color);
             transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: white;
             position: relative;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            z-index: 2;
+            letter-spacing: 2px;
             outline: none;
         }
 
         #magic-button:hover {
-            transform: scale(1.12) rotate(3deg); /* 加入一點點旋轉感 */
+            transform: scale(1.15) rotate(5deg);
             box-shadow: 
-                0 0 30px rgba(0, 0, 0, 0.3),
-                0 20px 60px var(--shadow-color);
-            border-color: rgba(255, 255, 255, 0.3);
+                0 0 40px rgba(0, 0, 0, 0.4),
+                0 25px 70px var(--shadow-color);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         #magic-button:active {
             transform: scale(0.95);
         }
 
-        /* 按鈕外圍的光圈 (Glow effect) */
         .btn-wrapper::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             background: var(--accent-gradient);
             border-radius: 50%;
-            filter: blur(35px);
-            opacity: 0.3;
-            transition: all 0.5s ease;
+            filter: blur(40px);
+            opacity: 0.35;
+            transition: all 0.6s ease;
             z-index: 0;
         }
 
-        .btn-wrapper:hover::before {
-            opacity: 0.6;
-            filter: blur(45px);
-            width: 200px;
-            height: 200px;
+        /* --- 時鐘顯示區塊 --- */
+        .clock-container {
+            margin-top: 2rem;
+            padding: 15px 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: inline-block;
+            transition: all 0.3s ease;
         }
 
-        /* 微動畫 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .clock-container:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        #clock {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .hint {
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            opacity: 0.8;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
+    <div class="stars-container">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
 
     <div class="container">
         <h1>點擊這裡有驚喜</h1>
@@ -143,19 +211,49 @@
             <button id="magic-button" onclick="sayHello()">點我點我</button>
         </div>
 
-        <p class="hint">試試看點擊上面的紅色圓形按鈕</p>
+        <div class="clock-container">
+            <div id="clock">00:00:00</div>
+        </div>
+
+        <p class="hint">目前時間</p>
     </div>
 
     <script>
+        // 勵志名言資料庫
+        const quotes = [
+            "每一刻都是新的開始。",
+            "成功不是終點，失敗也不是終結，重要的是勇心。",
+            "相信你自己，你就已經成功了一半。",
+            "夢想不會逃走，逃走的往往是自己。",
+            "簡單的事情重複做，你就是專家；重複的事情用心做，你就是贏家。",
+            "當你想要放棄的時候，想想當初為什麼開始。",
+            "你的努力，終將成就無與倫比的自己。",
+            "未來的你，一定會感謝現在拼命的自己。"
+        ];
+
         function sayHello() {
-            // 使用 alert 跳出視窗
-            alert("你好，Kevin！");
+            // 隨機選取一句名言
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+            alert("✨ 給 Kevin 的勵志名言 ✨\n\n「" + randomQuote + "」");
         }
         
-        // 額外增加小小的點擊動畫邏輯 (選用)
+        // 更新時鐘函式
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 每秒更新一次
+        setInterval(updateClock, 1000);
+        updateClock(); // 立即執行一次避免等待
+
         const btn = document.getElementById('magic-button');
         btn.addEventListener('click', () => {
-            console.log('Button clicked by Kevin!');
+            console.log('Quote delivered to Kevin!');
         });
     </script>
 </body>
